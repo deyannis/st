@@ -2,6 +2,7 @@ This is a fork of Suckless' st
 
 Patches:
 st-desktopentry-0.8.2.diff
+st-scrollback-20190331-21367a0.diff
 
 st - simple terminal
 --------------------
