@@ -638,6 +638,8 @@ setsel(char *str, Time t)
 	XSetSelectionOwner(xw.dpy, XA_PRIMARY, xw.win, t);
 	if (XGetSelectionOwner(xw.dpy, XA_PRIMARY) != xw.win)
 		selclear();
+
+	clipcopy(NULL);
 }
 
 void
@@ -655,7 +657,7 @@ brelease(XEvent *e)
 	}
 
 	if (e->xbutton.button == Button2)
-		selpaste(NULL);
+		clippaste(NULL);
 	else if (e->xbutton.button == Button1)
 		mousesel(e, 1);
 }
@@ -1963,4 +1965,23 @@ run:
 	run();
 
 	return 0;
+}
+
+void
+opencopied(const Arg *arg)
+{
+	size_t const max_cmd = 2048;
+	char * const clip = xsel.clipboard;
+	if(!clip) {
+		fprintf(stderr, "Warning: nothing copied to clipboard\n");
+		return;
+	}
+
+	/* account for space/quote (3) and \0 (1) and & (1) */
+	/* e.g.: xdg-open "https://st.suckless.org"& */
+	size_t const cmd_size = max_cmd + strlen(clip) + 5;
+	char cmd[cmd_size];
+
+	snprintf(cmd, cmd_size, "%s \"%s\"&", (char *)arg->v, clip);
+	system(cmd);
 }
