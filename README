@@ -1,5 +1,6 @@
 This is my fork of Suckless' st
 
+
 st - simple terminal
 --------------------
 st is a simple terminal emulator for X which sucks less.
@@ -39,6 +40,14 @@ st-scrollback-mouse-0.8.2.diff
 st-scrollback-mouse-altscreen-20190131-e23acb9.diff
 st-clipboard-0.8.2.diff
 st-openclipboard-20190202-3be4cf1.diff
+
+
+Other Changes
+-------------
+* Green on Black theme
+* Dejavu Sans Mono 11 fonts
+* Scrolls 5 lines at a time
+* URLs handled with Google Chrome
 
 
 Credits
