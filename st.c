@@ -42,7 +42,7 @@
 #define ISCONTROLC0(c)		(BETWEEN(c, 0, 0x1f) || (c) == '\177')
 #define ISCONTROLC1(c)		(BETWEEN(c, 0x80, 0x9f))
 #define ISCONTROL(c)		(ISCONTROLC0(c) || ISCONTROLC1(c))
-#define ISDELIM(u)		(u && wcschr(worddelimiters, u))
+#define ISDELIM(u)		(utf8strchr(worddelimiters, u) != NULL)
 #define TLINE(y)		((y) < term.scr ? term.hist[((y) + term.histi - \
 				term.scr + HISTSIZE + 1) % HISTSIZE] : \
 				term.line[(y) - term.scr])
@@ -217,6 +217,7 @@ static void selsnap(int *, int *, int);
 static size_t utf8decode(const char *, Rune *, size_t);
 static Rune utf8decodebyte(char, size_t *);
 static char utf8encodebyte(Rune, size_t);
+static char *utf8strchr(char *, Rune);
 static size_t utf8validate(Rune *, size_t);
 
 static char *base64dec(const char *);
@@ -343,6 +344,23 @@ utf8encodebyte(Rune u, size_t i)
 	return utfbyte[i] | (u & ~utfmask[i]);
 }
 
+char *
+utf8strchr(char *s, Rune u)
+{
+	Rune r;
+	size_t i, j, len;
+
+	len = strlen(s);
+	for (i = 0, j = 0; i < len; i += j) {
+		if (!(j = utf8decode(&s[i], &r, len - i)))
+			break;
+		if (r == u)
+			return &(s[i]);
+	}
+
+	return NULL;
+}
+
 size_t
 utf8validate(Rune *u, size_t i)
 {
@@ -465,7 +483,7 @@ selextend(int col, int row, int type, int done)
 	selnormalize();
 	sel.type = type;
 
-	if (oldey != sel.oe.y || oldex != sel.oe.x || oldtype != sel.type || sel.mode == SEL_EMPTY)
+	if (oldey != sel.oe.y || oldex != sel.oe.x || oldtype != sel.type)
 		tsetdirt(MIN(sel.nb.y, oldsby), MAX(sel.ne.y, oldsey));
 
 	sel.mode = done ? SEL_IDLE : SEL_READY;
@@ -1040,6 +1058,11 @@ tnew(int col, int row)
 	treset();
 }
 
+int tisaltscr(void)
+{
+	return IS_SET(MODE_ALTSCREEN);
+}
+
 void
 tswapscreen(void)
 {
@@ -1050,7 +1073,6 @@ tswapscreen(void)
 	term.mode ^= MODE_ALTSCREEN;
 	tfulldirt();
 }
-
 void
 kscrolldown(const Arg* a)
 {
@@ -1073,7 +1095,6 @@ void
 kscrollup(const Arg* a)
 {
 	int n = a->i;
-
 	if (n < 0)
 		n = term.row + n;
 
@@ -1617,7 +1638,6 @@ tsetmode(int priv, int set, int *args, int narg)
 			case 1015: /* urxvt mangled mouse mode; incompatible
 				      and can be mistaken for other control
 				      codes. */
-				break;
 			default:
 				fprintf(stderr,
 					"erresc: unknown private set/reset mode %d\n",
@@ -1889,7 +1909,7 @@ csireset(void)
 void
 strhandle(void)
 {
-	char *p = NULL, *dec;
+	char *p = NULL;
 	int j, narg, par;
 
 	term.esc &= ~(ESC_STR_END|ESC_STR);
@@ -1907,6 +1927,8 @@ strhandle(void)
 			return;
 		case 52:
 			if (narg > 2) {
+				char *dec;
+
 				dec = base64dec(strescseq.args[2]);
 				if (dec) {
 					xsetsel(dec);
@@ -1924,10 +1946,7 @@ strhandle(void)
 		case 104: /* color reset, here p = NULL */
 			j = (narg > 1) ? atoi(strescseq.args[1]) : -1;
 			if (xsetcolorname(j, p)) {
-				if (par == 104 && narg <= 1)
-					return; /* color reset without parameter */
-				fprintf(stderr, "erresc: invalid color j=%d, p=%s\n",
-				        j, p ? p : "(null)");
+				fprintf(stderr, "erresc: invalid color %s\n", p);
 			} else {
 				/*
 				 * TODO if defaultbg color is changed, borders
@@ -2379,6 +2398,7 @@ tputc(Rune u)
 			goto check_control_code;
 		}
 
+
 		if (IS_SET(MODE_SIXEL)) {
 			/* TODO: implement sixel mode */
 			return;
@@ -2643,10 +2663,9 @@ draw(void)
 	drawregion(0, 0, term.col, term.row);
 	if (term.scr == 0)
 		xdrawcursor(cx, term.c.y, term.line[term.c.y][cx],
-				term.ocx, term.ocy, term.line[term.ocy][term.ocx]);
+			term.ocx, term.ocy, term.line[term.ocy][term.ocx]);
 	term.ocx = cx, term.ocy = term.c.y;
 	xfinishdraw();
-	xximspot(term.ocx, term.ocy);
 }
 
 void
