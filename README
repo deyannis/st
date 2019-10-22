@@ -1,12 +1,4 @@
-This is a fork of Suckless' st
-
-Patches:
-st-desktopentry-0.8.2.diff
-st-scrollback-0.8.2.diff
-st-scrollback-mouse-0.8.2.diff
-st-scrollback-mouse-altscreen-20190131-e23acb9.diff
-st-clipboard-0.8.2.diff
-st-openclipboard-20190202-3be4cf1.diff
+This is my fork of Suckless' st
 
 st - simple terminal
 --------------------
@@ -38,7 +30,17 @@ the st terminfo entry with the following command:
 
 See the man page for additional details.
 
+
+Patches
+-------
+st-desktopentry-0.8.2.diff
+st-scrollback-0.8.2.diff
+st-scrollback-mouse-0.8.2.diff
+st-scrollback-mouse-altscreen-20190131-e23acb9.diff
+st-clipboard-0.8.2.diff
+st-openclipboard-20190202-3be4cf1.diff
+
+
 Credits
 -------
 Based on Aurélien APTEL <aurelien dot aptel at gmail dot com> bt source code.
-
