@@ -41,12 +41,13 @@ Cloned by https://git.suckless.org/st at 26/10/2023
 Patches
 -------
 st-desktopentry-0.8.5.diff
+st-focus-20200731-43a395a.diff
+
 st-scrollback-0.8.2.diff
 st-scrollback-mouse-0.8.2.diff
 st-scrollback-mouse-altscreen-20190131-e23acb9.diff
 st-openclipboard-20190202-3be4cf1.diff
-st-alpha-20220206-0.8.5.diff
-st-focus-20200731-patch_alpha.diff
+
 
 
 Other Changes
