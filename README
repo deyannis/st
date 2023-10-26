@@ -31,6 +31,12 @@ the st terminfo entry with the following command:
 
 See the man page for additional details.
 
+Version
+-------
+
+Cloned from https://git.suckless.org/st at 26/10/2023
+
+
 
 Patches
 -------
