@@ -82,6 +82,9 @@ void redraw(void);
 void tfulldirt(void);
 void draw(void);
 
+void kscrolldown(const Arg *);
+void kscrollup(const Arg *);
+
 void opencopied(const Arg *);
 void printscreen(const Arg *);
 void printsel(const Arg *);
