@@ -32,8 +32,13 @@ the st terminfo entry with the following command:
 See the man page for additional details.
 
 
-Version
+Credits
 -------
+Based on Aurélien APTEL <aurelien dot aptel at gmail dot com> bt source code.
+
+
+Current Version
+---------------
 
 Cloned by https://git.suckless.org/st at 26/10/2023
 
@@ -46,6 +51,7 @@ st-openclipboard-20220217-0.8.5.diff
 st-scrollback-0.8.5.diff
 st-scrollback-mouse-20220127-2c5edf2.diff
 st-scrollback-mouse-altscreen-20220127-2c5edf2.diff
+st-scrollback-reflow-20230607-211964d.diff
 
 
 
@@ -54,9 +60,3 @@ Other Changes
 * Green on Black theme
 * Dejavu Sans Mono 11 fonts
 * Scrolls 5 lines at a time
-* URLs handled with Google Chrome
-
-
-Credits
--------
-Based on Aurélien APTEL <aurelien dot aptel at gmail dot com> bt source code.
