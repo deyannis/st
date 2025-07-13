@@ -17,4 +17,5 @@
 * st-clickurl-nocontrol-0.9.2.diff
 * st-colors-at-launch-0.8.4.diff
 * st-drag-n-drop-0.9.2.diff
+* st-boxdraw\_v2-0.8.5.diff
 
