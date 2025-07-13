@@ -16,4 +16,5 @@
 * st-clipboard-0.8.3.diff
 * st-clickurl-nocontrol-0.9.2.diff
 * st-colors-at-launch-0.8.4.diff
+* st-drag-n-drop-0.9.2.diff
 
