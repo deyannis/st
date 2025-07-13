@@ -2079,6 +2079,8 @@ usage(void)
 int
 main(int argc, char *argv[])
 {
+    int i;
+    char *colval;
 	xw.l = xw.t = 0;
 	xw.isfixed = False;
 	xsetcursor(cursorshape);
@@ -2125,6 +2127,11 @@ main(int argc, char *argv[])
 		break;
 	case 'v':
 		die("%s " VERSION "\n", argv0);
+		break;
+    case 'C':
+        colval = strtok(EARGF(usage()), "@");
+        i = atoi(strtok(NULL, "@"));
+		colorname[i] = colval;
 		break;
 	default:
 		usage();
