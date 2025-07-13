@@ -121,11 +121,26 @@ static const char *colorname[] = {
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
-	"#000000",
-	"#00FF00",
-	"black",
+	"#000000",	// black		256
+	"#00FF00",	// lime green		257
+
+	// Nord colors
+	"#2e3440",	//   polar0		258
+	"#3b4252",	//   polar1		259
+	"#434c5e",	//   polar2		260
+	"#4c566a",	//   polar3		261
+	"#d8dee9",	//   snow0		262
+	"#e5e9f0",	//   snow1		263
+	"#eceff4",	//   snow2		264
+	"#8fbcbb",	//   frost0		265
+	"#88c0d0",	//   frost1		266
+	"#81a1c1",	//   frost2		267
+	"#5e81ac",	//   frost3		268
+	"#bf616a",	//   aurora0		269
+	"#d08770",	//   aurora1		270
+	"#ebcb8b",	//   aurora2		271
+	"#a3be8c",	//   aurora3		272
+	"#b48ead",	//   aurora4		273
 };
 
 
@@ -133,10 +148,10 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 259;
+unsigned int defaultfg = 262;
 unsigned int defaultbg = 258;
-unsigned int defaultcs = 259;
-static unsigned int defaultrcs = 257;
+unsigned int defaultcs = 271;
+static unsigned int defaultrcs = 271;
 unsigned int bg = 258, bgUnfocused = 258;
 
 /*
