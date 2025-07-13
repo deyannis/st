@@ -1,6 +1,3 @@
-This is my fork of Suckless' st
-
-
 st - simple terminal
 --------------------
 st is a simple terminal emulator for X which sucks less.
@@ -31,26 +28,7 @@ the st terminfo entry with the following command:
 
 See the man page for additional details.
 
-
-Patches
--------
-st-desktopentry-0.8.2.diff
-st-scrollback-0.8.2.diff
-st-scrollback-mouse-0.8.2.diff
-st-scrollback-mouse-altscreen-20190131-e23acb9.diff
-st-openclipboard-20190202-3be4cf1.diff
-st-alpha-20220206-0.8.5.diff
-st-focus-20200731-patch_alpha.diff
-
-
-Other Changes
--------------
-* Green on Black theme
-* Dejavu Sans Mono 11 fonts
-* Scrolls 5 lines at a time
-* URLs handled with Google Chrome
-
-
 Credits
 -------
 Based on Aurélien APTEL <aurelien dot aptel at gmail dot com> bt source code.
+
