@@ -2240,6 +2240,16 @@ strhandle(void)
 			if (narg > 1)
 				xsettitle(strescseq.args[1]);
 			return;
+		case 7:
+			if (strstr(strescseq.args[1], "file://") != strescseq.args[1]) {
+				fprintf(stderr, "erresc: dir %s must have prefix 'file://'\n",
+				        strescseq.args[1]);
+				return;
+			}
+			if (chdir(strescseq.args[1] + 7) != 0) /* +7 to remove prefix */
+				fprintf(stderr, "erresc: invalid directory %s\n",
+				        strescseq.args[1]);
+			return;
 		case 52:
 			if (narg > 2 && allowwindowops) {
 				dec = base64dec(strescseq.args[2]);
